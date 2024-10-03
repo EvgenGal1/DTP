@@ -109,6 +109,7 @@ desktop.ini
 vr/
 .env
 backend/README.md
+test/
 # dtos/
 # dist/
 
