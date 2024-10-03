@@ -108,6 +108,7 @@ desktop.ini
 # папка временных/пока не нужных файлов. для игнора и случайно залитых
 vr/
 .env
+backend/README.md
 # dtos/
 # dist/
 
