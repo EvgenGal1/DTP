@@ -7,10 +7,10 @@
 .yarn/install-state.gz
 
 # compiled output
-/dist
+/dist/
 # dtos/
 # production
-/build
+/build/
 
 # Logs
 logs
@@ -108,6 +108,7 @@ desktop.ini
 # папка временных/пока не нужных файлов. для игнора и случайно залитых
 vr/
 .env
+backend/dist/
 backend/README.md
 test/
 # dtos/
