@@ -1,16 +1,11 @@
 # compiled output
-/dist
+/dist/
 /node_modules
-/build
+/build/
 
 # Logs
 logs
 *.log
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
 
 # OS
 .DS_Store
@@ -35,12 +30,64 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# dotenv environment variable files
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# dependencies
+**/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# production
+/build
+
+# dotenv environment variable files and misc
 .env
 .env.development.local
 .env.test.local
 .env.production.local
 .env.local
+*.pem
+
+# debug
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# local env files
+.env*.local
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# js
+# src/scripts/*
+
+# scss
+# src/styles/all.scss
+
+# помошники
+GitHub Команды.txt
+git.txt
+info.txt
+infoMy.txt
+webpack*
+desktop.ini
+
+# настройки
+.vscode
 
 # temp directory
 .temp
@@ -57,5 +104,25 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 
 
-# СВОЁ пока не нужное
+
+
+# СВОЁ пока не нужное 
+# папка временных/пока не нужных файлов. для игнора и случайно залитых
+vr/
+.env
+backend/dist/
+backend/README.md
 test/
+# dtos/
+# dist/
+
+# ^ общ.врем.ОТКЛ.
+**/static/**
+
+# ^ общ.врем.ИСКЛЮЧЁННЫЕ
+# папки 
+!/**/src/configs/auth/
+# все.ф.в п. 
+# !/**/src/common/decorators/**
+# ф.
+!/**/src/configs/auth/auth.ts
