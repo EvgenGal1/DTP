@@ -110,6 +110,8 @@ vr/
 .env
 backend/dist/
 backend/README.md
+red-planner-front-end/**
+red-planner-back-end/**
 test/
 # dtos/
 # dist/
