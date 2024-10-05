@@ -118,11 +118,14 @@ test/
 
 # ^ общ.врем.ОТКЛ.
 **/static/**
+**/common/**
 
 # ^ общ.врем.ИСКЛЮЧЁННЫЕ
 # папки 
 !/**/src/configs/auth/
+!/**/common/envs/
 # все.ф.в п. 
 # !/**/src/common/decorators/**
 # ф.
+!/**/common/envs/env.consts.ts
 !/**/src/configs/auth/auth.ts
