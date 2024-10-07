@@ -13,29 +13,27 @@ async function bootstrap() {
 	// созд.экзепл.прилож пока без передачи настр.
 	const app = await NestFactory.create(AppModule)
 
-	// PORT Запуска
-	let PORT: number
-	if (isDevelopment) PORT = +process.env.PORT
-	else if (isProduction) PORT = +process.env.SB_PG_PORT
-	else PORT = 3000
+	// PORT Запуска SRV
+	let PORT_SRV: number
+	if (isDevelopment) PORT_SRV = +process.env.LH_SRV_PORT
+	else if (isProduction) PORT_SRV = +process.env.PRD_SRV_PORT
+	else PORT_SRV = 3000
 
 	// прослуш.PORT и fn()callback с cg на Запуск
-	let url: string
-	await app.listen(PORT, () => {
+	// let url: string
+	await app.listen(PORT_SRV, () => {
 		// ^ вывод подкл.к БД от NODE_ENV. PROD (БД покаНЕТ) <> DEV (Local БД DTP)
-		let srt: string, port: string, source: string
+		let env: string, port_db: string, srv_url: string
 		if (isDevelopment) {
-			srt = 'DEV'
-			source = 'LocalHost'
-			port = `${process.env.LH_PG_PORT}(${source})`
-			url = process.env.PROTOCOL + process.env.PORT
+			env = 'DEV'
+			port_db = process.env.LH_DB_PORT
+			srv_url = `${process.env.LH_SRV_URL + process.env.LH_SRV_PORT}`
 		} else if (isProduction) {
-			srt = 'PROD'
-			port = process.env.SB_PG_PORT + '(SupaBase)'
-			source = 'VERCEL'
-			url = process.env.VERCEL_URL
+			env = 'PROD'
+			port_db = process.env.SB_DB_PORT
+			srv_url = process.env.VL_SRV_URL
 		}
-		console.log(`${srt}. Сервер - ${port}, подключён '${source}' - ${url}`)
+		console.log(`${env}. БД: ${port_db}, SRV: ${srv_url}`)
 	})
 }
 bootstrap()
