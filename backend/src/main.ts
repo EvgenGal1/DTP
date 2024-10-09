@@ -7,33 +7,31 @@ import { isProduction, isDevelopment } from './common/envs/env.consts.js'
 
 // загр.перем.окруж.от кмд.NODE_ENV
 if (isDevelopment) config({ path: '.env.development' })
-else if (isProduction) config()
+else if (isProduction) config({ path: '.env.production' })
 
 async function bootstrap() {
 	// созд.экзепл.прилож пока без передачи настр.
 	const app = await NestFactory.create(AppModule)
 
 	// PORT Запуска SRV
-	let PORT_SRV: number
-	if (isDevelopment) PORT_SRV = +process.env.LH_SRV_PORT
-	else if (isProduction) PORT_SRV = +process.env.PRD_SRV_PORT
-	else PORT_SRV = 3000
+	const PORT: number = isProduction
+		? +process.env.DB_SB_PORT || 3000
+		: +process.env.LH_SRV_PORT || 3000
 
 	// прослуш.PORT и fn()callback с cg на Запуск
-	// let url: string
-	await app.listen(PORT_SRV, () => {
+	await app.listen(PORT, () => {
 		// ^ вывод подкл.к БД от NODE_ENV. PROD (БД покаНЕТ) <> DEV (Local БД DTP)
-		let env: string, port_db: string, srv_url: string
-		if (isDevelopment) {
-			env = 'DEV'
-			port_db = process.env.LH_DB_PORT
-			srv_url = `${process.env.LH_SRV_URL + process.env.LH_SRV_PORT}`
-		} else if (isProduction) {
-			env = 'PROD'
-			port_db = process.env.SB_DB_PORT
-			srv_url = process.env.VL_SRV_URL
+		let mod: string, db: string, srv: string
+		if (isProduction) {
+			mod = 'PROD'
+			db = process.env.DB_SB_PORT
+			srv = process.env.SRV_VL_URL
+		} else if (isDevelopment) {
+			mod = 'DEV'
+			db = `${process.env.LH_DB_NAME}_${process.env.LH_DB_USER}:${process.env.LH_DB_PORT}`
+			srv = `${process.env.LH_SRV_URL + process.env.LH_SRV_PORT}`
 		}
-		console.log(`${env}. БД: ${port_db}, SRV: ${srv_url}`)
+		console.log(`${mod}.  SRV: ${srv}  БД: ${db}`)
 	})
 }
 bootstrap()
